@@ -1,6 +1,5 @@
 import 'package:api_demo/cubit/posts_cubit.dart';
 import 'package:api_demo/cubit/posts_states.dart';
-import 'package:api_demo/dio_client.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -23,7 +22,19 @@ class MainApp extends StatelessWidget {
           builder: (context, state) {
             var cubit = PostsCubit.get(context);
             return Scaffold(
-                body: Center(child: Image.network('https://cdn.dummyjson.com/product-images/9/thumbnail.jpg')));
+              // body: Center(child: Image.network('https://cdn.dummyjson.com/product-images/9/thumbnail.jpg'))
+              body: ListView.builder(
+                  itemCount: cubit.posts.length,
+                  itemBuilder: (context, index) => Card(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(cubit.posts[index].title),
+                            Text(cubit.posts[index].title),
+                          ],
+                        ),
+                      )),
+            );
           },
         ),
       ),
